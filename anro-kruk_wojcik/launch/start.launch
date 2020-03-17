@@ -1,0 +1,11 @@
+<launch>
+	<node pkg="turtlesim" name="turtle1" type="turtlesim_node"/>
+	<param name ="speed" type="int" value="2" />
+	
+	<node pkg="anro-kruk_wojcik" type="main.py" name="my_robot" output="screen">
+		<param name = "go_forward" type="str" value="w" />
+		<param name = "go_backward" type="str" value = "s" />
+		<param name = "go_right" type="str" value="d" />
+		<param name = "go_left" type="str" value = "a" /> 
+	</node>	
+</launch>
