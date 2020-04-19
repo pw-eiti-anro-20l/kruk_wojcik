@@ -5,7 +5,6 @@ from tf.transformations import *
 
 dh = {'row1': [0, 1, 0, 0], 'row2': [0, 1, 1.57, 1.57], 'row3': [0, 1, 1.57, 1.57]}
 
-
 def writeUrdfFile ():
     with open ('./src/anro2/config/urdf_data.yaml', 'w') as f:
         rowNumber = 1
