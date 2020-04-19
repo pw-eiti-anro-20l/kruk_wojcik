@@ -2,8 +2,8 @@
 <robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <xacro:property name="urdf_data" value="${load_yaml('../config/urdf_data.yaml')}"/>
-
-    <xacro:property name="box_size" value="0.05"/>
+	
+	<xacro:property name="box_size" value="0.05"/>
 	<xacro:property name="base_box_size" value="0.3"/>
     <xacro:property name="last_link_len" value="0.1"/>  
     <xacro:property name="last_link_radius" value="0.03"/>    
@@ -12,7 +12,8 @@
     <material name="yellow"> 
         <color rgba="1 1 0 1"/>
     </material>
-    <material name="blue">
+    
+	<material name="blue">
         <color rgba="0 0.7 1 1"/>
     </material>
 
