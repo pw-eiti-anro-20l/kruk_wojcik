@@ -4,6 +4,7 @@
     <xacro:property name="urdf_data" value="${load_yaml('../config/urdf_data.yaml')}"/>
 
     <xacro:property name="box_size" value="0.04"/>
+    <xacro:property name="base_box_size" value="0.4"/>    
 	
     <xacro:property name="last_link_len" value="0.1"/>  
     <xacro:property name="last_link_radius" value="0.02"/>    
@@ -19,7 +20,7 @@
 
 
 
-    <link name="base_l">
+    <link name="base_link">
         <visual>
             <geometry>
 				<box size="${box_size} ${box_size} ${urdf_data['i1']['l_len']} "/>
@@ -59,10 +60,10 @@
         </visual>
     </link>
 
-    <joint name="base_link1" type="prismatic">
+    <joint name="base_link_link1" type="prismatic">
     	<axis xyz="0 1 0"/>
     	<limit effort="1000.0" lower="0.0" upper="1" velocity="0.5"/>
-        <parent link="base_l"/>
+        <parent link="base_link"/>
         <child link="link1"/>
         <origin xyz="${urdf_data['i1']['j_xyz']}" rpy="${urdf_data['i1']['j_rpy']}"/>
     </joint>

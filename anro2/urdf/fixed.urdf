@@ -20,7 +20,7 @@
 
 
 
-    <link name="base_l">
+    <link name="base_link">
         <visual>
             <geometry>
 				<box size="${box_size} ${box_size} ${urdf_data['i1']['l_len']} "/>
@@ -60,8 +60,8 @@
         </visual>
     </link>
 
-    <joint name="base_link1" type="fixed">
-        <parent link="base_l"/>
+    <joint name="base_link_link1" type="fixed">
+        <parent link="base_link"/>
         <child link="link1"/>
         <origin xyz="${urdf_data['i1']['j_xyz']}" rpy="${urdf_data['i1']['j_rpy']}"/>
     </joint>
