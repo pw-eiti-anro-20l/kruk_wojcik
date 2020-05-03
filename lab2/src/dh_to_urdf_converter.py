@@ -6,7 +6,7 @@ from tf.transformations import *
 dh = {'row1': [0, 1.0, 0, 0], 'row2': [0, 1.0, 1.57, 1.57], 'row3': [0, 1.0, 1.57, 1.57]}
 
 def writeUrdfFile ():
-    with open ('./src/anro2/config/urdf_data.yaml', 'w') as f:
+    with open ('./src/lab2/config/urdf_data.yaml', 'w') as f:
         rowNumber = 1
         for row in dh:
             a, d, alpha, theta = dh [row]
@@ -17,10 +17,9 @@ def writeUrdfFile ():
             rotate_around_x = rotation_matrix (alpha, (1, 0 ,0))
             rotate_around_z = rotation_matrix (theta, (0, 0, 1))
 
-            transformation = concatenate_matrices (move_along_z, rotate_around_z, move_along_x, rotate_around_x)
+            transformation = concatenate_matrices (rotate_around_x, move_along_x, rotate_around_z, move_along_z)
             rpy = euler_from_matrix (transformation)
             xyz = translation_from_matrix (transformation)
-            
             
             f.write("i{}:".format(rowNumber) + "\n")
             f.write("  j_xyz: {} {} {}".format(*xyz) + "\n")
