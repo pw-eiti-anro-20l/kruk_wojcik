@@ -25,7 +25,7 @@ def writeUrdfFile ():
             f.write("i{}:".format(rowNumber) + "\n")
             f.write("  j_xyz: {} {} {}".format(*xyz) + "\n")
             f.write("  j_rpy: {} {} {}".format(*rpy) + "\n")
-            f.write("  l_xyz: {} 0 0".format(*xyz / 2) + "\n")
+            f.write("  l_xyz: {} {} {}".format(*xyz / 2) + "\n")
             f.write("  l_rpy: 0 0 0\n")
             f.write("  l_len: {}".format(d) + "\n")
 

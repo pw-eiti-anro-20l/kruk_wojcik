@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot name="robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    <xacro:property name="urdf_data" value="${load_yaml('../config/urdf_data.yaml')}"/>
+    <xacro:property name="urdf_data" value="${load_yaml('$(find lab3)/config/urdf_params.yaml')}"/>
 
     <xacro:property name="box_size" value="0.05"/>
 	<xacro:property name="base_box_size" value="0.3"/>
@@ -22,7 +22,7 @@
             <geometry>
 				<box size="${base_box_size} ${base_box_size} ${base_box_size} "/>
             </geometry>
-			<origin xyz="0 0 -${base_box_size/2}"/>
+			<origin xyz="0 0 0"/>
             <material name="yellow"/>
         </visual>
     </link>
@@ -32,7 +32,7 @@
             <geometry>
 				<box size="${box_size} ${box_size} ${urdf_data['i1']['l_len']} "/>
             </geometry>
-			<origin xyz="0 0 ${urdf_data['i1']['l_len']/2}" rpy="${urdf_data['i1']['l_rpy']}"/>
+			<origin xyz="0 0 ${-urdf_data['i1']['l_len']/2}" rpy="${urdf_data['i1']['l_rpy']}"/>
             <material name="blue"/>
         </visual>
     </link>
@@ -42,7 +42,7 @@
             <geometry>
 				<box size="${box_size} ${box_size} ${urdf_data['i2']['l_len']}"/>
             </geometry>
-			<origin xyz="0 0 ${urdf_data['i2']['l_len']/2}" rpy="${urdf_data['i2']['l_rpy']}"/>
+			<origin xyz="0 0 ${-urdf_data['i2']['l_len']/2}" rpy="${urdf_data['i2']['l_rpy']}"/>
             <material name="yellow"/>
         </visual>
     </link>
@@ -50,19 +50,19 @@
     <link name="link3">
         <visual>
             <geometry>
-				<box size="${box_size} ${box_size} ${urdf_data['i2']['l_len']}"/>
+				<box size="${box_size} ${box_size} ${urdf_data['i3']['l_len']}"/>
             </geometry>
-			<origin xyz="0 0 ${urdf_data['i3']['l_len']/2}" rpy="${urdf_data['i3']['l_rpy']}"/>
+			<origin xyz="0 0 ${-urdf_data ['i3']['l_len']/2}" rpy="${urdf_data['i3']['l_rpy']}"/>
             <material name="blue"/>
         </visual>
     </link>
 	
-	<link name="link4">
+	<link name="gripper">
         <visual>
             <geometry>
                 <cylinder length="${last_link_len}" radius="${last_link_radius}"/>
             </geometry>
-			<origin xyz="0 ${last_link_radius} ${box_size/2}" rpy="0 0 0"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
             <material name="yellow"/>
         </visual>
     </link>
@@ -73,7 +73,7 @@
 
         <parent link="base_link"/>
         <child link="link1"/>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+		<origin xyz="${urdf_data['i1']['j_xyz']}" rpy="${urdf_data['i1']['j_rpy']}"/>
     </joint>
 
     <joint name="link1_link2" type="prismatic">
@@ -81,7 +81,7 @@
     	<limit effort="1000.0" lower="-1" upper="0" velocity="0.5"/>
         <parent link="link1"/>
         <child link="link2"/>
-        <origin xyz="${urdf_data['i1']['j_xyz']}" rpy="${urdf_data['i1']['j_rpy']}"/>
+        <origin xyz="${urdf_data['i2']['j_xyz']}" rpy="${urdf_data['i2']['j_rpy']}"/>
     </joint>
 
     <joint name="link2_link3" type="prismatic">
@@ -89,12 +89,12 @@
     	<limit effort="1000.0" lower="-1" upper="0" velocity="0.5"/>
         <parent link="link2"/>
         <child link="link3"/>
-        <origin xyz="${urdf_data['i2']['j_xyz']}" rpy="${urdf_data['i2']['j_rpy']}"/>
+        <origin xyz="${urdf_data['i3']['j_xyz']}" rpy="${urdf_data['i2']['j_rpy']}"/>
     </joint>
 
-    <joint name="link3_link4" type="fixed">
+    <joint name="link3_gripper" type="fixed">
         <parent link="link3"/>
-        <child link="link4"/>
-        <origin xyz="${urdf_data['i3']['j_xyz']}" rpy="${urdf_data['i3']['j_rpy']}"/>
+        <child link="gripper"/>
+		<origin xyz="0 0 0" rpy="0 0 0"/>
     </joint>
 </robot>
