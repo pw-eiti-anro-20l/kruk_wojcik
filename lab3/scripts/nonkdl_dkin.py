@@ -12,9 +12,9 @@ dh_data = {
 }  
 
 bounds = {
-    "i1": [-0.5, 0.5],             
-    "i2": [-0.5, 0.5],             
-    "i3": [-0.5, 0.5],             
+    "i1": [-1, 0],             
+    "i2": [-1, 0],             
+    "i3": [-1, 0],             
 }
 
 def trans_matrix (data):
@@ -52,7 +52,18 @@ def response_PoseStamped (matrix, data):
     pose_stamped.pose.orientation.w = quaternions [3]
     return pose_stamped
 
+def inBounds (data):
+    j = 0
+    for bound in bounds:
+        if bounds [bound][0] > data.position [j] or bounds [bound][1] < data.position [j]:
+            return False
+    return True
+
 def callback (data):
+    if not inBounds (data):
+        rospy.logerr ("you cant go there :(")
+        return
+
     matrix = trans_matrix (data)
     my_pose = response_PoseStamped (matrix, data)
     publisher = rospy.Publisher('nonkdl_dkin_msgs', PoseStamped, queue_size=10)
