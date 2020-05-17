@@ -1,0 +1,9 @@
+<launch>
+	<arg name="rvizconfig" default="$(find lab4)/rviz/config.rviz" />
+	<param name="robot_description" command="xacro '$(find lab4)/urdf/robot2.xacro'"/>
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+		<rosparam param="source_list">["int"]</rosparam>
+	</node> 
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true"/>
+</launch>

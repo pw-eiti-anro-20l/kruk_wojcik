@@ -1,0 +1,7 @@
+float64 base_link_link1
+float64 link1_link2
+float64 link2_link3
+float64 time
+string type
+---
+bool status

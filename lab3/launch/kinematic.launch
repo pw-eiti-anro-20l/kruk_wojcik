@@ -2,6 +2,6 @@
     <param name="robot_description" command="xacro '$(find lab3)/urdf/robot2.xacro'"/>
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
-    <node name="NONKDL_DKIN" pkg="lab3" type="nonkdl_dkin.py" output="screen" />
     <node name="NKDL_DKIN" pkg="lab3" type="kdl_dkin.py" output="screen" />
+    <node name="NONKDL_DKIN" pkg="lab3" type="nonkdl_dkin.py" output="screen" />
 </launch>
