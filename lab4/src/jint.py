@@ -34,12 +34,11 @@ def inBounds (req):
         return False
     return True
 
-def joint_state_constructor (poses):
+def joint_state_constructor ():
     js = JointState()
     js.name = ['base_link_link1', 'link1_link2', 'link2_link3']
     js.header = Header()
     js.header.stamp = rospy.Time.now()
-    js.position = poses
     return js 
 
 def mainLoop (req):
@@ -57,7 +56,8 @@ def mainLoop (req):
             poses.append (interpolate (
                 prev_p [i], req_p [i], cur_time, req.time, req.type))
             
-        js = joint_state_constructor (poses)
+        js = joint_state_constructor ()
+        js.position = poses
         pub.publish (js)
         pub_path.publish (new_path (js, path))
 

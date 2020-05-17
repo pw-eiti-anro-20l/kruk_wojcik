@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import rospy
-from interpolation import lin_int
+from interpolation import interpolate 
 from geometry_msgs.msg import PoseStamped
 from nav_msgs.msg import Path
 from lab4.srv import oint
