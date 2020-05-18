@@ -28,7 +28,7 @@ def createPath (pose_stamped):
 prev_p = [0, 0, 0, 0, 0, 0, 1]
 def moveLoop (req):
     global prev_p
-    frq = 100
+    frq = 30
     rate = rospy.Rate (frq)
     cur_time = 0
     new_p = [req.x, req.y, req.z, req.qx, req.qy, req.qz, req.qw]

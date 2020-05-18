@@ -41,6 +41,7 @@ def joint_state_constructor ():
     js.header.stamp = rospy.Time.now()
     return js 
 
+path = Path ()
 def mainLoop (req):
     req_p = [req.base_link_link1, req.link1_link2, req.link2_link3]
     prev_p = rospy.wait_for_message (
@@ -78,5 +79,4 @@ def main ():
 if __name__ == "__main__":
     pub = rospy.Publisher ('int', JointState, queue_size = 10)
     pub_path = rospy.Publisher ('pathJint', Path, queue_size = 10)
-    path = Path ()
     main ()
